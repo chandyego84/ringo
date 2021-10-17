@@ -8,7 +8,6 @@ from datetime import date
 import webbrowser
 from bs4 import BeautifulSoup
 import playsound
-import os 
 
 # initializing txt -> speech
 engine = pyt.init()
@@ -55,6 +54,7 @@ while True:
         # check for commands
         if ("hey" in query or "hello" in query or "hi" in query or "wake up" in query):
             if called == False:
+                # first greeting to ringo
                 if (int(hour) > 20):
                     # almost midnight
                     speak(f"It is {str(int(hour) % 12)} PM sir..."
@@ -74,14 +74,14 @@ while True:
             break
 
         elif ("my beat" in query or "my song" in query):
-            # play MY song ;)
             speak("If you wish sir...")
             playsound.playsound(r'C:\Users\chand\voiceAssist\ringo\music\AC_DC - Back In Black (Official Video) (1).mp3')
 
         elif ('play' and 'song' in query):
             speak("Let me find a song for you.")
             # open spotify
-            webbrowser.open("https://spotifytest.chandyego84.repl.co/")
+            
+            #webbrowser.open("https://spotifytest.chandyego84.repl.co/")
             #browser.find_element_by_xpath('//*[@id="main"]/div/div/div[1]/div[1]/div').click()
         
         elif 'wikipedia' in query:
@@ -93,7 +93,7 @@ while True:
                 speak("According to Wikipedia")
                 print(results)
                 speak(results)
-                
+
             except Exception as e:
                 print("Exception:", e)
 
