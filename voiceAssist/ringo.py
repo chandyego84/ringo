@@ -88,12 +88,15 @@ while True:
             speak('Alright, searching the internet...')
             query = query.replace("wikipedia", "")
             query = query.replace("ringo", "")
-            results = wikipedia.summary(query, sentences = 3, 
-            auto_suggest=False)
-            speak("According to Wikipedia")
-            print(results)
-            speak(results)
-        
+            try:
+                results = wikipedia.summary(query, sentences = 3, auto_suggest=False)
+                speak("According to Wikipedia")
+                print(results)
+                speak(results)
+                
+            except Exception as e:
+                print("Exception:", e)
+
         elif 'life' in query:
             results = wikipedia.summary('absurdism', sentences = 2)
             speak(results)
