@@ -9,6 +9,10 @@ import webbrowser
 from bs4 import BeautifulSoup
 import playsound
 
+from time import sleep 
+import os
+import music
+
 # initializing txt -> speech
 engine = pyt.init()
 voices = engine.getProperty('voices')
@@ -45,7 +49,9 @@ def takeCommand():
 today = date.today()
 hour = datetime.datetime.now().time().strftime('%H')
 
+spotObj = music.SpotMusic()
 called = False
+is_Spotify = False  
 while True:
     query = takeCommand().lower()
     print("step.\n")
@@ -77,13 +83,16 @@ while True:
             speak("If you wish sir...")
             playsound.playsound(r'C:\Users\chand\voiceAssist\ringo\music\AC_DC - Back In Black (Official Video) (1).mp3')
 
-        elif ('play' and 'song' in query):
-            speak("Let me find a song for you.")
-            # open spotify
-            
-            #webbrowser.open("https://spotifytest.chandyego84.repl.co/")
-            #browser.find_element_by_xpath('//*[@id="main"]/div/div/div[1]/div[1]/div').click()
-        
+        elif ("play" in query and "song" in query):
+            if (not is_Spotify):
+                # open spotify once
+                os.system("spotify")
+                is_Spotify = True
+                sleep(1.5)
+
+            speak("Ok, I hope you enjoy sir...")
+            spotObj.play_randPlaylist()
+
         elif 'wikipedia' in query:
             speak('Alright, searching the internet...')
             query = query.replace("wikipedia", "")
