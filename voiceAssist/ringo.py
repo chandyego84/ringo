@@ -51,16 +51,14 @@ hour = datetime.datetime.now().time().strftime('%H')
 
 spotObj = music.SpotMusic()
 called = False
-is_Spotify = False  
 while True:
     query = takeCommand().lower()
-    print("step.\n")
 
-    if ("ringo" in query):
+    if ("ringo" in query or called):
+        if called == False:
+            called = True
         # check for commands
         if ("hey" in query or "hello" in query or "hi" in query or "wake up" in query):
-            if called == False:
-                # first greeting to ringo
                 if (int(hour) > 20):
                     # almost midnight
                     speak(f"It is {str(int(hour) % 12)} PM sir..."
@@ -71,10 +69,6 @@ while True:
                     "You need to rest.")
                 else:
                     speak("Hello sir...")
-                called = True
-            
-            else:
-                speak("Hello, I am not very smart yet. Please give me some time.")
 
         elif ("stop listening" in query):
             break
@@ -84,12 +78,6 @@ while True:
             playsound.playsound(r'C:\Users\chand\voiceAssist\ringo\music\AC_DC - Back In Black (Official Video) (1).mp3')
 
         elif ("play" in query and "song" in query):
-            if (not is_Spotify):
-                # open spotify once
-                os.system("spotify")
-                is_Spotify = True
-                sleep(1.5)
-
             speak("Ok, I hope you enjoy sir...")
             spotObj.play_randPlaylist()
 
