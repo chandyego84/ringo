@@ -79,7 +79,14 @@ while True:
 
         elif ("play" in query and "song" in query):
             speak("Ok, I hope you enjoy sir...")
-            spotObj.play_randPlaylist()
+            spotObj.play_randPlaylist()    
+
+        elif ("play" in query):
+            # just one song
+            query = query.replace("ringo", "")
+            query = query.replace("play", "")
+            print(f"Song to play: {query}")
+            spotObj.playSpecific(query)
 
         elif 'wikipedia' in query:
             speak('Alright, searching the internet...')
