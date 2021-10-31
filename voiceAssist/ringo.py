@@ -13,6 +13,8 @@ from time import sleep
 import os
 import music
 
+#from facerec import facerec as fr
+
 # initializing txt -> speech
 engine = pyt.init()
 voices = engine.getProperty('voices')
@@ -20,7 +22,6 @@ engine.setProperty('rate', 160) # change speaking rate from 200 wpm to 180 wpm
 
 #browser = webdriver.Chrome(ChromeDriverManager().install())
 #browser = webdriver.Chrome(executable_path=r'C:/Users/chand/Downloads/chromedriver_win32/chromedriver.exe')
-
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
@@ -53,6 +54,8 @@ spotObj = music.SpotMusic()
 called = False
 while True:
     query = takeCommand().lower()
+    #faces = fr.faceRec()
+    #print(faces)
 
     if ("ringo" in query or called):
         if called == False:
