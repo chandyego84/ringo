@@ -8,10 +8,12 @@ from datetime import date
 import webbrowser
 from bs4 import BeautifulSoup
 import playsound
+from ecapture import ecapture as ec
 
 from time import sleep 
 import os
 import music
+
 
 #from facerec import facerec as fr
 
@@ -20,8 +22,6 @@ engine = pyt.init()
 voices = engine.getProperty('voices')
 engine.setProperty('rate', 160) # change speaking rate from 200 wpm to 180 wpm
 
-#browser = webdriver.Chrome(ChromeDriverManager().install())
-#browser = webdriver.Chrome(executable_path=r'C:/Users/chand/Downloads/chromedriver_win32/chromedriver.exe')
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
@@ -103,6 +103,11 @@ while True:
 
             except Exception as e:
                 print("Exception:", e)
+        
+        elif 'take' and 'picture' in query:
+            speak("Say cheese!")
+            # take a webcam picture
+            ec.capture(0, "RingoPhotographer", "autoImg.jpg")
 
         elif 'life' in query:
             results = wikipedia.summary('absurdism', sentences = 2)
